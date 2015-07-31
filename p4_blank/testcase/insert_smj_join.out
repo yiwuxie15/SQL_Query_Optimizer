@@ -1,0 +1,92 @@
+Welcome to Minirel
+1 --> Query: create table soaps(soapid integer, name char(32), network char(4), rating double);
+2 --> Query:  create table stars(starid integer, real_name char(20), plays char(12), soapid integer);
+3 --> Query:  insert into stars(starid, real_name, plays, soapid) values (1, Kay, sha, 1);
+4 --> Query:  insert into stars(starid, real_name, plays, soapid) values (2, Ann, Parker, Arbor, 3);
+5 --> Query:  insert into stars(starid, real_name, plays, soapid) values (3, Titan, Seng, 5);
+6 --> Query:  insert into stars(starid, real_name, plays, soapid) values (4, song, kkk, 6);
+7 --> Query:  insert into stars(starid, real_name, plays, soapid) values (5, Tang, Hao, 7);
+8 --> Query:  insert into stars(starid, real_name, plays, soapid) values (6, Zeng, Hen, 9);
+9 --> Query:  insert into stars(starid, real_name, plays, soapid) values (7, Ross, Robit, 12);
+10 --> Query:  insert into stars(starid, real_name, plays, soapid) values (8, liu, lll, 12);
+11 --> Query:  insert into stars(starid, real_name, plays, soapid) values (9, NI, HAO, 12);
+12 --> Query:  insert into stars(starid, real_name, plays, soapid) values (10, China, USA, 12);
+13 --> Query:  insert into stars(real_name, starid, plays, soapid) values (Ge, 9, Di, 9);
+14 --> Query:  insert into stars(real_name, starid, plays, soapid) values (Jiuli, 10, Timber, 10);
+15 --> Query:  insert into stars(real_name, starid, plays, soapid) values (Ke, 13, Zhu, 12);
+16 --> Query:  insert into stars(real_name, starid, plays) values (Ted, 9, peter);
+Error: attribute type mismatch
+17 --> Query:  insert into stars(real_name, starid, plays, soapid) values (Ted, 9, peterrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr, 11);
+Error: attributes too long
+18 --> Query:  insert into soaps (soapid, name, network, rating) values (1, Ann, A, 1.00);
+19 --> Query:  insert into soaps (soapid, name, network, rating) values (2, Baltimore, B, 2.00);
+20 --> Query:  insert into soaps (soapid, name, network, rating) values (3, Celitc, C, 1.20);
+21 --> Query:  insert into soaps (soapid, name, network, rating) values (6, Dallas, D, 3.00);
+22 --> Query:  insert into soaps (soapid, name, network, rating) values (6, Ellington, E, 3.40);
+23 --> Query:  insert into soaps (soapid, name, network, rating) values (7, Flton, F, 3.68);
+24 --> Query:  insert into soaps (soapid, name, network, rating) values (9, Gallon, G, 3.78);
+25 --> Query:  insert into soaps (soapid, name, network, rating) values (10, Hilton, H, 3.88);
+26 --> Query:  insert into soaps (soapid, name, network, rating) values (12, Illinois, I, 4.00);
+27 --> Query:  select soaps.network, stars.starid from soaps, stars where soaps.soapid = stars.starid;
+Algorithm: SM Join
+network.0  starid.  
+---------  -------  
+A          1        
+B          2        
+C          3        
+D          6        
+E          6        
+F          7        
+G          9        
+G          9        
+H          10       
+H          10       
+
+Number of records: 10
+Buf Stats: accesses = 93, disk reads = 11, disk writes = 18
+
+28 --> Query:  select * from soaps, stars where soaps.soapid = stars.starid;
+Algorithm: SM Join
+soapid.  name.1           network.2  rating.  starid.  real_name.5      plays.6       soapid.  
+-------  ---------------  ---------  -------  -------  ---------------  ------------  -------  
+1        Ann              A          1.00     1        Kay              sha           1        
+2        Baltimore        B          2.00     2        Ann, Parker      Arbor         3        
+3        Celitc           C          1.20     3        Titan            Seng          5        
+6        Dallas           D          3.00     6        Zeng             Hen           9        
+6        Ellington        E          3.40     6        Zeng             Hen           9        
+7        Flton            F          3.68     7        Ross             Robit         12       
+9        Gallon           G          3.78     9        NI               HAO           12       
+9        Gallon           G          3.78     9        Ge               Di            9        
+10       Hilton           H          3.88     10       China            USA           12       
+10       Hilton           H          3.88     10       Jiuli            Timber        10       
+
+Number of records: 10
+Buf Stats: accesses = 146, disk reads = 11, disk writes = 20
+
+29 --> Query:  select soaps.network, stars.soupid from soaps, stars where soaps.soapid = stars.soapid;
+Invalid attribute: Invalid SQL Statement
+Buf Stats: accesses = 11, disk reads = 0, disk writes = 0
+
+30 --> Query:  select * from soaps, stars where soaps.soapid = stars.soapid;
+Algorithm: SM Join
+soapid.  name.1           network.2  rating.  starid.  real_name.5      plays.6       soapid.  
+-------  ---------------  ---------  -------  -------  ---------------  ------------  -------  
+1        Ann              A          1.00     1        Kay              sha           1        
+3        Celitc           C          1.20     2        Ann, Parker      Arbor         3        
+6        Dallas           D          3.00     4        song             kkk           6        
+6        Ellington        E          3.40     4        song             kkk           6        
+7        Flton            F          3.68     5        Tang             Hao           7        
+9        Gallon           G          3.78     6        Zeng             Hen           9        
+9        Gallon           G          3.78     9        Ge               Di            9        
+10       Hilton           H          3.88     10       Jiuli            Timber        10       
+12       Illinois         I          4.00     7        Ross             Robit         12       
+12       Illinois         I          4.00     8        liu              lll           12       
+12       Illinois         I          4.00     9        NI               HAO           12       
+12       Illinois         I          4.00     10       China            USA           12       
+12       Illinois         I          4.00     13       Ke               Zhu           12       
+
+Number of records: 13
+Buf Stats: accesses = 151, disk reads = 12, disk writes = 22
+
+31 --> Query:  drop table soaps;
+32 --> Query:  drop table stars;

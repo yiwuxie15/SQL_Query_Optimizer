@@ -1,0 +1,9 @@
+This test case tests the select function vigorously.
+It starts by creating 2 tables: table1 and table2
+It then selects * on both tables to see if all of the tuples output.
+It then performs a simple select query to see if it will correctly print out 1 attribute.
+It then prforms a query that prints out 2 attributes that are in the opposite order of which they are stored in the database to see if they are outputted in the correct order.
+It the performs a query with an equality condition to make sure ScanSelect is used.
+It then creates an index on table2.id2 and performs the same query to see if IndexScan is now used.
+It then performs a query with a non-equality condition.
+It the proceeds to test the different operators to make sure they work.

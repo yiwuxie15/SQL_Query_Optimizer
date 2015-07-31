@@ -1,0 +1,7 @@
+This test case tests which algorithms join.cpp calls with different conditions.
+We create 2 table: table1 and table2.
+We then perform an equijoin (with no indices on the relations) to see if SMJ is used.
+We then perform 2 non-equijoins (with no indices on the relations) to see if SNL is used.
+We then create an index on table2.id2.
+We then perform 2 non-equijoins(with an index) to see if SNL is still called.
+We then perform an equijoin (with an index) to see if INL is used.

@@ -1,0 +1,7 @@
+The test creates 2 tables: table1 and table2.
+It then selects * from the tables to show what they contain.
+It then attempts to do perform a non-equijoin to make sure SNL is the algorithm used.
+It then creates an index table1(id) and then attempts to do perform the same non-equijoin to make sure SNL is the algorithm used still. 
+It then performs non-equijoins using all of the different operators to make sure the records in the 2 tables are matched correctly.
+
+The tables both have duplicates so the test case makes sure that the duplicates are not ignored.

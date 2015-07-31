@@ -1,0 +1,10 @@
+This test creates 2 tables: table1 and table2.
+It selects * the tables to see what is in them.
+It then creates an index on table1.id.
+It then performs an equijoin to make sure INL is the algorithm used.
+It then creates an index on table2.id2.
+It then performs the same equijoin to make sure INL is the algorithm used.
+It then drops the index on table1.id so that table2.id2 is the only index.
+It then performs the same equijoin to make sure INL is the algorithm used.
+
+The tables both have duplicates so the test case makes sure that the duplicates are not ignored.
